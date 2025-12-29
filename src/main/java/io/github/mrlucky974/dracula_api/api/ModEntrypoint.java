@@ -1,6 +1,7 @@
 package io.github.mrlucky974.dracula_api.api;
 
 import io.github.mrlucky974.dracula_api.api.registry.BaseRegistry;
+import io.github.mrlucky974.dracula_api.api.registry.Entrypoint;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,7 @@ public abstract class ModEntrypoint extends AbstractModEntrypoint<BaseRegistry, 
     private final Logger logger;
 
     public ModEntrypoint(String modId, String modName) {
-        super(modId);
+        super(modId, Entrypoint.COMMON);
         this.logger = LoggerFactory.getLogger(modName);
     }
 

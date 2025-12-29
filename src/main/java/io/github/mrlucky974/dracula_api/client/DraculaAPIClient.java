@@ -17,6 +17,6 @@ public class DraculaAPIClient extends ModClientEntrypoint {
 
     @Override
     public Logger logger() {
-        return ModEntrypoint.get(modId).logger();
+        return ModEntrypoint.getCommon(modId).logger();
     }
 }

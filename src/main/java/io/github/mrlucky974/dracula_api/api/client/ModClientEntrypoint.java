@@ -2,6 +2,7 @@ package io.github.mrlucky974.dracula_api.api.client;
 
 import io.github.mrlucky974.dracula_api.api.AbstractModEntrypoint;
 import io.github.mrlucky974.dracula_api.api.Initializable;
+import io.github.mrlucky974.dracula_api.api.registry.Entrypoint;
 import io.github.mrlucky974.dracula_api.api.registry.client.BaseClientRegistry;
 import net.fabricmc.api.ClientModInitializer;
 
@@ -9,7 +10,7 @@ public abstract class ModClientEntrypoint extends AbstractModEntrypoint<BaseClie
         implements ClientModInitializer, Initializable {
 
     public ModClientEntrypoint(String modId) {
-        super(modId);
+        super(modId, Entrypoint.CLIENT);
     }
 
     @Override

@@ -17,7 +17,7 @@ public final class TagUtil {
 
     public static class Items {
         public static TagKey<Item> get(String modId, String name) {
-            return get(ModEntrypoint.get(modId), name);
+            return get(ModEntrypoint.getCommon(modId), name);
         };
 
         public static TagKey<Item> get(ModEntrypoint modEntrypoint, String name) {
@@ -27,7 +27,7 @@ public final class TagUtil {
 
     public static class Blocks {
         public static TagKey<Block> get(String modId, String name) {
-            return get(ModEntrypoint.get(modId), name);
+            return get(ModEntrypoint.getCommon(modId), name);
         };
 
         public static TagKey<Block> get(ModEntrypoint modEntrypoint, String name) {
