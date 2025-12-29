@@ -89,10 +89,10 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/MrLucky974/dracula-api")
+            url = "https://maven.pkg.github.com/MrLucky974/dracula-api"
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-                password = project.findProperty("gpr.key") ?: System.getenv("FABRIC_GITHUB_TOKEN")
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("FABRIC_GITHUB_TOKEN")
             }
         }
     }
