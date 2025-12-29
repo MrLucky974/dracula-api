@@ -9,6 +9,4 @@ public abstract class BaseRegistry implements Initializable {
     public BaseRegistry(ModEntrypoint modEntrypoint) {
         this.modEntrypoint = modEntrypoint;
     }
-
-    public abstract void init();
 }
