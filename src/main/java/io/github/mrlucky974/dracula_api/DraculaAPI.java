@@ -1,10 +1,23 @@
 package io.github.mrlucky974.dracula_api;
 
-import net.fabricmc.api.ModInitializer;
+import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
+import io.github.mrlucky974.dracula_api.test.ExampleBlockEntityTypeRegistry;
+import io.github.mrlucky974.dracula_api.test.ExampleBlockRegistry;
+import io.github.mrlucky974.dracula_api.test.ExampleItemRegistry;
 
-public class DraculaAPI implements ModInitializer {
+public class DraculaAPI extends ModEntrypoint {
+    public static final String MOD_ID = "dracula_api";
+
+    public DraculaAPI() {
+        super(MOD_ID, "Dracula API");
+    }
 
     @Override
-    public void onInitialize() {
+    public void init() {
+        this.logger().info("Hello, it works!");
+
+        addRegistry(ExampleItemRegistry::new);
+        addRegistry(ExampleBlockRegistry::new);
+        addRegistry(ExampleBlockEntityTypeRegistry::new);
     }
 }
