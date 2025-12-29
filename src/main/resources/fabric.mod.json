@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "dracula_api",
+  "version": "${version}",
+  "name": "Dracula API",
+  "description": "A collection of shared code across my Minecraft mods",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/dracula_api/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "io.github.mrlucky974.dracula_api.client.DraculaAPIDataGenerator"
+    ],
+    "client": [
+      "io.github.mrlucky974.dracula_api.client.DraculaAPIClient"
+    ],
+    "main": [
+      "io.github.mrlucky974.dracula_api.DraculaAPI"
+    ]
+  },
+  "mixins": [
+    "dracula_api.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
