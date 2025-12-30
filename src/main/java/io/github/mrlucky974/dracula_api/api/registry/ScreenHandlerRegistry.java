@@ -17,13 +17,13 @@ public abstract class ScreenHandlerRegistry extends BaseRegistry {
     }
 
     protected final <T extends ScreenHandler> ScreenHandlerType<T> register(String name, ScreenHandlerType.Factory<T> factory) {
-        return Registry.register(Registries.SCREEN_HANDLER, modEntrypoint.id(name), new ScreenHandlerType<>(factory, FeatureSet.empty()));
+        return RegistryHelper.registerScreenHandler(modEntrypoint.id(name), factory);
     }
 
     protected final <T extends ScreenHandler, D extends CustomPayload> ExtendedScreenHandlerType<T, D>
     register(String name,
              ExtendedScreenHandlerType.ExtendedFactory<T, D> factory,
              PacketCodec<? super RegistryByteBuf, D> codec) {
-        return Registry.register(Registries.SCREEN_HANDLER, modEntrypoint.id(name), new ExtendedScreenHandlerType<>(factory, codec));
+        return RegistryHelper.registerScreenHandler(modEntrypoint.id(name), factory, codec);
     }
 }

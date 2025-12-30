@@ -10,6 +10,6 @@ public abstract class CriterionRegistry extends BaseRegistry {
     }
 
     protected final <T extends Criterion<?>> T register(String name, T criterion) {
-        return Criteria.register(modEntrypoint.modId() + "/" + name, criterion);
+        return RegistryHelper.registerCriterion(modEntrypoint.id(name), criterion);
     }
 }

@@ -14,6 +14,6 @@ public abstract class BlockEntityTypeRegistry extends BaseRegistry {
     }
 
     protected final <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory, Block... blocks) {
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, modEntrypoint.id(name), FabricBlockEntityTypeBuilder.<T>create(entityFactory, blocks).build());
+        return RegistryHelper.registerBlockEntityType(modEntrypoint.id(name), entityFactory, blocks);
     }
 }

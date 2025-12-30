@@ -1,6 +1,7 @@
 package io.github.mrlucky974.dracula_api.api.registry;
 
 import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
@@ -22,6 +23,10 @@ public abstract class RecipeRegistry extends BaseRegistry {
         serializerRegistry.init();
     }
 
+//    protected final <T extends Recipe<?>, U extends RecipeType<? extends T>, I extends RecipeSerializer<? extends T>> void registerRecipe(String name, U type, I serializer) {
+//
+//    }
+
     protected final <T extends RecipeType<?>> T registerType(String name, T type) {
         return typeRegistry.register(name, type);
     }
@@ -41,7 +46,7 @@ public abstract class RecipeRegistry extends BaseRegistry {
         }
 
         protected <T extends RecipeType<?>> T register(String name, T type) {
-            return Registry.register(Registries.RECIPE_TYPE, modEntrypoint.id(name), type);
+            return RegistryHelper.registerRecipeType(modEntrypoint.id(name), type);
         }
     }
 
@@ -56,7 +61,7 @@ public abstract class RecipeRegistry extends BaseRegistry {
         }
 
         protected <T extends RecipeSerializer<?>> T register(String name, T serializer) {
-            return Registry.register(Registries.RECIPE_SERIALIZER, modEntrypoint.id(name), serializer);
+            return RegistryHelper.registerRecipeSerializer(modEntrypoint.id(name), serializer);
         }
     }
 }

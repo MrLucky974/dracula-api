@@ -2,8 +2,6 @@ package io.github.mrlucky974.dracula_api.api.registry;
 
 import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 
 public abstract class ItemGroupRegistry extends BaseRegistry {
     public ItemGroupRegistry(ModEntrypoint modEntrypoint) {
@@ -11,6 +9,6 @@ public abstract class ItemGroupRegistry extends BaseRegistry {
     }
 
     protected final <T extends ItemGroup> T register(String name, T itemGroup) {
-        return Registry.register(Registries.ITEM_GROUP, modEntrypoint.id(name), itemGroup);
+        return RegistryHelper.registerItemGroup(modEntrypoint.id(name), itemGroup);
     }
 }

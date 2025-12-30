@@ -15,8 +15,6 @@ public abstract class ItemRegistry extends BaseRegistry {
     }
 
     protected final <T extends Item> T register(String name, Function<Item.Settings, T> itemFactory, Item.Settings itemSettings) {
-        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, modEntrypoint.id(name));
-        T item = itemFactory.apply(itemSettings.registryKey(itemKey));
-        return Registry.register(Registries.ITEM, itemKey, item);
+        return RegistryHelper.registerItem(modEntrypoint.id(name), itemFactory, itemSettings);
     }
 }

@@ -18,16 +18,6 @@ public abstract class BlockRegistry extends BaseRegistry {
     }
 
     protected final <T extends Block> T register(String name, Function<Block.Settings, T> blockFactory, Block.Settings blockSettings, boolean shouldRegisterItem) {
-        RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, modEntrypoint.id(name));
-        T block = blockFactory.apply(blockSettings.registryKey(blockKey));
-
-        if (shouldRegisterItem) {
-            RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, modEntrypoint.id(name));
-
-            BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey());
-            Registry.register(Registries.ITEM, itemKey, blockItem);
-        }
-
-        return Registry.register(Registries.BLOCK, blockKey, block);
+        return RegistryHelper.registerBlock(modEntrypoint.id(name), blockFactory, blockSettings, shouldRegisterItem);
     }
 }
