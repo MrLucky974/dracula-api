@@ -18,7 +18,8 @@ public class TranslationHelper {
         }
     }
 
-    public static String translateId(String prefix, Identifier id) {
-        return prefix + id.getNamespace() + "." + id.getPath().replace('/', '.');
+    protected static <T extends Translatable> void addTranslatable(@NotNull FabricLanguageProvider.TranslationBuilder translationBuilder,
+                                   @NotNull T translatable, @NotNull String value) {
+        translationBuilder.add(translatable.getTranslationKey(), value);
     }
 }
