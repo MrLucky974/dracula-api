@@ -10,9 +10,6 @@
   "icon": "assets/dracula_api/icon.png",
   "environment": "*",
   "entrypoints": {
-    "fabric-datagen": [
-      "io.github.mrlucky974.dracula_api.client.DraculaAPIDataGenerator"
-    ],
     "client": [
       "io.github.mrlucky974.dracula_api.client.DraculaAPIClient"
     ],
