@@ -8,6 +8,7 @@
   "contact": {},
   "license": "MIT",
   "icon": "assets/dracula_api/icon.png",
+  "accessWidener": "dracula_api.classtweaker",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -15,6 +16,12 @@
     ],
     "main": [
       "io.github.mrlucky974.dracula_api.DraculaAPI"
+    ],
+    "mm:early_risers": [
+      "io.github.mrlucky974.dracula_api.EarlyRiser"
+    ],
+    "dracula_api:crossbow_charge_types": [
+      "io.github.mrlucky974.dracula_api.test.item.ExampleCrossbowChargeTypes"
     ]
   },
   "mixins": [
@@ -23,6 +30,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "mm": ">=${fabric_asm_version}"
   }
 }

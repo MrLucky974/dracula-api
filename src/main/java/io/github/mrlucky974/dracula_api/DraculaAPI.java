@@ -4,6 +4,7 @@ import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
 import io.github.mrlucky974.dracula_api.test.ExampleBlockEntityTypeRegistry;
 import io.github.mrlucky974.dracula_api.test.ExampleBlockRegistry;
 import io.github.mrlucky974.dracula_api.test.ExampleItemRegistry;
+import net.minecraft.item.CrossbowItem;
 
 public class DraculaAPI extends ModEntrypoint {
     public static final String MOD_ID = "dracula_api";

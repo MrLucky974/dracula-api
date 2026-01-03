@@ -4,9 +4,12 @@
   "package": "io.github.mrlucky974.dracula_api.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin"
+    "CrossbowItemMixin",
+    "LivingEntityMixin",
+    "RangedWeaponItemMixin"
   ],
   "client": [
+    "client.ChargeTypePropertyMixin",
     "client.GameRendererMixin"
   ],
   "injectors": {
