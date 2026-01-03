@@ -4,6 +4,7 @@
   "package": "io.github.mrlucky974.dracula_api.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "LivingEntityMixin"
   ],
   "client": [
     "client.GameRendererMixin"
