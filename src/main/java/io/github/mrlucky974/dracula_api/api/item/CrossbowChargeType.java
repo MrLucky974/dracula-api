@@ -26,6 +26,14 @@ public final class CrossbowChargeType implements StringIdentifiable {
         return identifier;
     }
 
+    public Identifier getModelId() {
+        return getModelId(this);
+    }
+
+    public static Identifier getModelId(CrossbowChargeType type) {
+        return type.getIdentifier().withPrefixedPath("item/crossbow_");
+    }
+
     @Override
     public String asString() {
         return identifier.toUnderscoreSeparatedString().toLowerCase(Locale.ROOT);

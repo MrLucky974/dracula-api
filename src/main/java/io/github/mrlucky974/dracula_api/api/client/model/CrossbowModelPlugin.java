@@ -44,7 +44,7 @@ public class CrossbowModelPlugin implements ModelLoadingPlugin, ModelModifier.Af
         List<CrossbowChargeType> values = CrossbowChargeTypeBootstrap.values();
 
         for (CrossbowChargeType type : values) {
-            Identifier modelId = getModelId(type);
+            Identifier modelId = type.getModelId();
             SimpleUnbakedExtraModel<ItemModel> model = new SimpleUnbakedExtraModel<>(modelId, (bakedSimpleModel, baker) -> {
                 ModelTextures modelTextures = bakedSimpleModel.getTextures();
                 List<BakedQuad> list = bakedSimpleModel.bakeGeometry(modelTextures, baker,
@@ -62,10 +62,6 @@ public class CrossbowModelPlugin implements ModelLoadingPlugin, ModelModifier.Af
                 .register(this);
     }
 
-    private static Identifier getModelId(CrossbowChargeType type) {
-        return type.getIdentifier().withPrefixedPath("item/crossbow_");
-    }
-
     @Override
     public @NonNull ItemModel modifyModelAfterBake(@NonNull ItemModel model,
                                                    ModelModifier.AfterBakeItem.Context context) {
@@ -75,7 +71,7 @@ public class CrossbowModelPlugin implements ModelLoadingPlugin, ModelModifier.Af
             List<SelectItemModel.SwitchCase<CrossbowItem.ChargeType>> cases = new ArrayList<>();
 
             for (CrossbowChargeType type : values) {
-                Identifier modelId = getModelId(type);
+                Identifier modelId = type.getModelId();
                 ItemModel.Unbaked typeUnbakedModel = ItemModels.basic(modelId);
                 cases.add(ItemModels.switchCase(type.asEnumValue(), typeUnbakedModel));
             }
