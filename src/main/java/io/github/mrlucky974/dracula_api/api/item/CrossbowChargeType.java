@@ -19,7 +19,8 @@ public final class CrossbowChargeType implements StringIdentifiable {
     }
 
     public CrossbowItem.ChargeType asEnumValue() {
-        return ClassTinkerers.getEnum(CrossbowItem.ChargeType.class, identifier.toUnderscoreSeparatedString().toUpperCase(Locale.ROOT));
+        return ClassTinkerers.getEnum(CrossbowItem.ChargeType.class, asString()
+                .toUpperCase(Locale.ROOT));
     }
 
     public Identifier getIdentifier() {
@@ -36,6 +37,6 @@ public final class CrossbowChargeType implements StringIdentifiable {
 
     @Override
     public String asString() {
-        return identifier.toUnderscoreSeparatedString().toLowerCase(Locale.ROOT);
+        return identifier.toUnderscoreSeparatedString();
     }
 }
