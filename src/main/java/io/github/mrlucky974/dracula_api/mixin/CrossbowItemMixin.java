@@ -39,8 +39,17 @@ public abstract class CrossbowItemMixin {
             boolean critical,
             CallbackInfoReturnable<ProjectileEntity> cir) {
         if (projectileStack.getItem() instanceof CrossbowProjectileItem projectileItem) {
-            if (projectileItem.hasCustomProjectile()) {
-                cir.setReturnValue(projectileItem.createProjectileEntity(world, projectileStack, shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true));
+            ProjectileEntity projectileEntity = projectileItem.createProjectileEntity(world,
+                    projectileStack,
+                    weaponStack,
+                    shooter,
+                    shooter.getX(),
+                    shooter.getEyeY() - 0.15F,
+                    shooter.getZ(),
+                    true
+            );
+            if (projectileEntity != null) {
+                cir.setReturnValue(projectileEntity);
             }
         }
     }
