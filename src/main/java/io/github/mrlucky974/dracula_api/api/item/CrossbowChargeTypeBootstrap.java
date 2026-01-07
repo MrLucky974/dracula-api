@@ -22,7 +22,7 @@ public final class CrossbowChargeTypeBootstrap {
         List<CrossbowChargeTypeProvider> providers = FabricLoader.getInstance()
                 .getEntrypoints(ENTRYPOINT, CrossbowChargeTypeProvider.class);
         for (CrossbowChargeTypeProvider provider : providers) {
-            LOGGER.info("Found provider: {}", provider.getClass().getName());
+            LOGGER.info("Found charge type provider: {}", provider.getClass().getName());
         }
 
         CrossbowChargeTypeInternals.freeze();

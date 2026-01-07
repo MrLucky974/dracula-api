@@ -1,23 +1,11 @@
 package io.github.mrlucky974.dracula_api.client;
 
-import io.github.mrlucky974.dracula_api.DraculaAPI;
-import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
-import io.github.mrlucky974.dracula_api.api.client.ModClientEntrypoint;
 import io.github.mrlucky974.dracula_api.api.client.model.CrossbowModelPlugin;
-import org.slf4j.Logger;
+import net.fabricmc.api.ClientModInitializer;
 
-public class DraculaAPIClient extends ModClientEntrypoint {
-    public DraculaAPIClient() {
-        super(DraculaAPI.MOD_ID);
-    }
-
+public class DraculaAPIClient implements ClientModInitializer {
     @Override
-    public void init() {
+    public void onInitializeClient() {
         CrossbowModelPlugin.register();
-    }
-
-    @Override
-    public Logger logger() {
-        return ModEntrypoint.getCommon(modId).logger();
     }
 }

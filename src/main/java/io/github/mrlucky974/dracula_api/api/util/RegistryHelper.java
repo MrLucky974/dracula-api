@@ -1,4 +1,4 @@
-package io.github.mrlucky974.dracula_api.api.registry;
+package io.github.mrlucky974.dracula_api.api.util;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
