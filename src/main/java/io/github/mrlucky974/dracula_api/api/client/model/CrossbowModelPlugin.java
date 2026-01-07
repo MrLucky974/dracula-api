@@ -1,5 +1,6 @@
 package io.github.mrlucky974.dracula_api.api.client.model;
 
+import io.github.mrlucky974.dracula_api.DraculaAPI;
 import io.github.mrlucky974.dracula_api.api.item.CrossbowChargeType;
 import io.github.mrlucky974.dracula_api.api.item.CrossbowChargeTypeBootstrap;
 import net.fabricmc.fabric.api.client.model.loading.v1.ExtraModelKey;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +33,6 @@ import java.util.List;
 import java.util.function.Function;
 
 public class CrossbowModelPlugin implements ModelLoadingPlugin, ModelModifier.AfterBakeItem {
-    private static final Logger LOGGER = LoggerFactory.getLogger("Test");
-
     private CrossbowModelPlugin() {}
 
     public static void register() {
@@ -45,7 +45,7 @@ public class CrossbowModelPlugin implements ModelLoadingPlugin, ModelModifier.Af
 
         for (CrossbowChargeType type : values) {
             Identifier modelId = type.getModelId();
-            SimpleUnbakedExtraModel<ItemModel> model = new SimpleUnbakedExtraModel<>(modelId, (bakedSimpleModel, baker) -> {
+            SimpleUnbakedExtraModel<@NotNull ItemModel> model = new SimpleUnbakedExtraModel<>(modelId, (bakedSimpleModel, baker) -> {
                 ModelTextures modelTextures = bakedSimpleModel.getTextures();
                 List<BakedQuad> list = bakedSimpleModel.bakeGeometry(modelTextures, baker,
                         ModelRotation.IDENTITY).getAllQuads();
@@ -56,6 +56,8 @@ public class CrossbowModelPlugin implements ModelLoadingPlugin, ModelModifier.Af
             });
 
             pluginContext.addModel(ExtraModelKey.create(modelId::toString), model);
+
+            DraculaAPI.LOGGER.info("Adding model for charge type: {} (model id: {})", type.asString(), modelId);
         }
 
         pluginContext.modifyItemModelAfterBake()

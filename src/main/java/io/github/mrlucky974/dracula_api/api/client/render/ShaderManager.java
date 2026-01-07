@@ -2,7 +2,6 @@ package io.github.mrlucky974.dracula_api.api.client.render;
 
 import com.google.gson.JsonSyntaxException;
 import io.github.mrlucky974.dracula_api.DraculaAPI;
-import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.PostEffectProcessor;
@@ -12,6 +11,8 @@ import net.minecraft.client.render.FrameGraphBuilder;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.ObjectAllocator;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -70,7 +71,7 @@ public class ShaderManager {
         try {
             return CLIENT.getShaderLoader().loadPostEffect(shaderId, DefaultFramebufferSet.MAIN_ONLY);
         } catch (JsonSyntaxException jsonSyntaxException) {
-            ModEntrypoint.getCommon(DraculaAPI.MOD_ID).logger().warn("Failed to parse shader: {}", shaderId, jsonSyntaxException);
+            DraculaAPI.LOGGER.warn("Failed to parse shader: {}", shaderId, jsonSyntaxException);
         }
         return null;
     }
