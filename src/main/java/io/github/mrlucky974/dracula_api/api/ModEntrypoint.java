@@ -1,7 +1,9 @@
 package io.github.mrlucky974.dracula_api.api;
 
+import io.github.mrlucky974.dracula_api.DraculaAPI;
 import io.github.mrlucky974.dracula_api.api.util.ModUtil;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 
@@ -9,15 +11,11 @@ import java.lang.reflect.Modifier;
 import java.util.Set;
 
 public abstract class ModEntrypoint implements ModInitializer {
-
-    protected ModEntrypoint() {
-        ModUtil.register(this.getClass());
-    }
-
     protected abstract void onModInitialize();
 
     @Override
     public final void onInitialize() {
+        DraculaAPI.LOGGER.info("Initializing entrypoint: {}", this.getClass().getName());
         initRegistries();
         onModInitialize();
     }
@@ -32,12 +30,13 @@ public abstract class ModEntrypoint implements ModInitializer {
      */
     protected void initRegistries() {
         Reflections reflections = getReflections();
-        Set<Class<?>> registryClasses = reflections.getTypesAnnotatedWith(Registry.class);
+        Set<Class<?>> registryClasses = reflections.getTypesAnnotatedWith(ModRegistry.class);
 
         for (Class<?> registryClass : registryClasses) {
             try {
                 // Only load non-abstract classes
                 if (!Modifier.isAbstract(registryClass.getModifiers())) {
+                    DraculaAPI.LOGGER.info("Loading registry: {}", registryClass.getName());
                     Class.forName(registryClass.getName());
                 }
             } catch (ClassNotFoundException e) {
@@ -48,32 +47,7 @@ public abstract class ModEntrypoint implements ModInitializer {
 
     @NotNull
     private Reflections getReflections() {
-        String basePackage = this.getClass().getPackage().getName();
+        String basePackage = this.getClass().getPackageName();
         return new Reflections(basePackage);
-    }
-
-    // ----------------------------
-    // Safe mod ID resolution
-    // ----------------------------
-
-    public static String modId() {
-        Class<?> modClass = getCallingModClass();
-        return ModUtil.modId(modClass);
-    }
-
-    public static net.minecraft.util.Identifier id(String name) {
-        Class<?> modClass = getCallingModClass();
-        return ModUtil.id(modClass, name);
-    }
-
-    private static Class<?> getCallingModClass() {
-        return java.lang.StackWalker.getInstance(java.lang.StackWalker.Option.RETAIN_CLASS_REFERENCE)
-                .walk(frames -> frames
-                        .map(java.lang.StackWalker.StackFrame::getDeclaringClass)
-                        .filter(ModEntrypoint.class::isAssignableFrom)
-                        .findFirst()
-                        .orElseThrow(() -> new IllegalStateException(
-                                "Could not determine calling mod class from the stack"
-                        )));
     }
 }

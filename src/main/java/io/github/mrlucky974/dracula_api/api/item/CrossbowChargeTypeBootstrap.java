@@ -1,6 +1,7 @@
 package io.github.mrlucky974.dracula_api.api.item;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import io.github.mrlucky974.dracula_api.DraculaAPI;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
@@ -11,8 +12,6 @@ import java.util.Locale;
 
 @ApiStatus.Internal
 public final class CrossbowChargeTypeBootstrap {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CrossbowChargeTypeBootstrap.class);
-
     private static final String ENTRYPOINT =
             "dracula_api:crossbow_charge_types";
 
@@ -22,7 +21,7 @@ public final class CrossbowChargeTypeBootstrap {
         List<CrossbowChargeTypeProvider> providers = FabricLoader.getInstance()
                 .getEntrypoints(ENTRYPOINT, CrossbowChargeTypeProvider.class);
         for (CrossbowChargeTypeProvider provider : providers) {
-            LOGGER.info("Found charge type provider: {}", provider.getClass().getName());
+            DraculaAPI.LOGGER.info("Found crossbow charge type provider: {}", provider.getClass().getName());
         }
 
         CrossbowChargeTypeInternals.freeze();
@@ -36,7 +35,7 @@ public final class CrossbowChargeTypeBootstrap {
             String name = type.asString();
             builder.addEnum(name.toUpperCase(Locale.ROOT), name);
 
-            LOGGER.info("Registering crossbow charge type: {}", type.asString());
+            DraculaAPI.LOGGER.info("Registering crossbow charge type: {}", type.asString());
         }
 
         builder.build();

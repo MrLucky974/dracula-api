@@ -1,7 +1,6 @@
 package io.github.mrlucky974.dracula_api.api.registry;
 
-import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
-import io.github.mrlucky974.dracula_api.api.Registry;
+import io.github.mrlucky974.dracula_api.api.ModRegistry;
 import io.github.mrlucky974.dracula_api.api.util.ModUtil;
 import net.minecraft.util.Identifier;
 
@@ -13,17 +12,17 @@ public abstract class BaseRegistry {
      * Builds an Identifier for a registry entry using the mod class from @Registry.
      * Detects the calling registry class automatically.
      */
-    static Identifier id(String name) {
+    protected static Identifier id(String name) {
         Class<?> registryClass = findConcreteRegistryClass();
 
-        Registry registryAnnotation = registryClass.getAnnotation(Registry.class);
+        ModRegistry registryAnnotation = registryClass.getAnnotation(ModRegistry.class);
         if (registryAnnotation == null) {
             throw new IllegalStateException(
                     "@Registry annotation missing on " + registryClass.getName()
             );
         }
 
-        return ModUtil.id(registryAnnotation.value(), name);
+        return ModUtil.id(registryAnnotation.value().value(), name);
     }
 
     private static Class<?> findConcreteRegistryClass() {
@@ -41,7 +40,7 @@ public abstract class BaseRegistry {
                 if (Modifier.isAbstract(cls.getModifiers())) continue;
 
                 // Must actually declare @Registry
-                if (!cls.isAnnotationPresent(Registry.class)) continue;
+                if (!cls.isAnnotationPresent(ModRegistry.class)) continue;
 
                 return cls;
             } catch (ClassNotFoundException ignored) {

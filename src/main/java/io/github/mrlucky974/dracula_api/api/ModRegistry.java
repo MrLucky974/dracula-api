@@ -4,6 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Registry {
-    Class<? extends ModEntrypoint> value();
+public @interface ModRegistry {
+    ModReference value();
 }

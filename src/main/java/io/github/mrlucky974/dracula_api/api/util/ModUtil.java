@@ -1,5 +1,7 @@
 package io.github.mrlucky974.dracula_api.api.util;
 
+import io.github.mrlucky974.dracula_api.DraculaAPI;
+import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
 import io.github.mrlucky974.dracula_api.api.ModID;
 import net.minecraft.util.Identifier;
 
@@ -12,13 +14,14 @@ public class ModUtil {
     private ModUtil() {}
 
     // register a mod class with its annotation
-    public static void register(Class<?> modClass) {
+    public static void register(Class<? extends ModEntrypoint> modClass) {
         ModID annotation = modClass.getAnnotation(ModID.class);
         if (annotation == null) throw new IllegalStateException("ModID annotation missing!");
         MOD_IDS.put(modClass, annotation.value());
+        DraculaAPI.LOGGER.info("Registered mod class {} with id: {}", modClass.getName(), annotation.value());
     }
 
-    public static String modId(Class<?> modClass) {
+    public static String modId(Class<? extends ModEntrypoint> modClass) {
         String modId = MOD_IDS.get(modClass);
         if (modId == null) {
             // fallback to annotation without registration
@@ -32,7 +35,7 @@ public class ModUtil {
         return modId;
     }
 
-    public static Identifier id(Class<?> modClass, String name) {
+    public static Identifier id(Class<? extends ModEntrypoint> modClass, String name) {
         String modId = modId(modClass);
         return Identifier.of(modId, name);
     }

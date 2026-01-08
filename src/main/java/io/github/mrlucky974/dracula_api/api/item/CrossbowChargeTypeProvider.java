@@ -1,7 +1,8 @@
 package io.github.mrlucky974.dracula_api.api.item;
 
 import io.github.mrlucky974.dracula_api.api.ModEntrypoint;
-import io.github.mrlucky974.dracula_api.api.Registry;
+import io.github.mrlucky974.dracula_api.api.ModReference;
+import io.github.mrlucky974.dracula_api.api.ModRegistry;
 import io.github.mrlucky974.dracula_api.api.util.ModUtil;
 import net.minecraft.util.Identifier;
 
@@ -11,7 +12,10 @@ public abstract class CrossbowChargeTypeProvider {
      * Registers a crossbow charge type and returns it.
      */
     protected static CrossbowChargeType of(String name) {
-        Identifier identifier = id(name);
+        return of(id(name));
+    }
+
+    private static CrossbowChargeType of(Identifier identifier) {
         return CrossbowChargeTypeInternals.register(identifier);
     }
 
@@ -22,7 +26,7 @@ public abstract class CrossbowChargeTypeProvider {
     static Identifier id(String name) {
         Class<?> registryClass = findConcreteRegistryClass();
 
-        Registry registryAnnotation = registryClass.getAnnotation(Registry.class);
+        ModReference registryAnnotation = registryClass.getAnnotation(ModReference.class);
         if (registryAnnotation == null) {
             throw new IllegalStateException("@Registry annotation missing on " + registryClass.getName());
         }
